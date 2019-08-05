@@ -1,0 +1,5 @@
+nome = str(input())
+sal_fixo = float(input())
+montante = float(input())
+TOTAL = sal_fixo + (0.15*montante)
+print('TOTAL = R$ %.2f' %TOTAL) 

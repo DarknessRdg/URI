@@ -1,5 +1,5 @@
 # URI
-My accpeted solutions to some questions on URI
+My accepted solutions to some questions on URI
 
 * Iniciantes
 * String

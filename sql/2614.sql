@@ -1,0 +1,1 @@
+select c.name, rentals_date  from customers c, rentals r where r.id_customers = c.id and (r.rentals_date >= '2016-09-1' and r.rentals_date <= '2016-09-30')

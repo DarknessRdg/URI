@@ -1,0 +1,1 @@
+select count(distinct city) count from customers 

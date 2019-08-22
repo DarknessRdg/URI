@@ -1,0 +1,1 @@
+select pd.name, p.name from providers p, products pd where p.id = pd.id_providers and p.name = 'Ajax SA' 

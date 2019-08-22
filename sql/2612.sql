@@ -1,0 +1,1 @@
+select distinct m.id, m.name from movies m, movies_actors mv, actors a, genres g where m.id_genres = g.id and mv.id_movies = m.id and mv.id_actors = a.id and (a.name = 'Marcelo Silva' or a.name = 'Miguel Silva') and g.description = 'Action';

@@ -47,7 +47,7 @@ int id_nome_pessoa(string __nome) {
     return id-1;
 }
 
-void bfs(
+void dfs(
         Conexao* conexao[],
         int qnt_conexos,
         Pessoa* pessoas_atual,
@@ -76,7 +76,7 @@ void bfs(
             outra_pessoa = pessoas[con->a];
         }
 
-        bfs(conexao, qnt_conexos, outra_pessoa, pessoas);
+        dfs(conexao, qnt_conexos, outra_pessoa, pessoas);
     }
 }
 
@@ -107,7 +107,7 @@ int main() {
 
     for (Pessoa* p: pessoas) {
         if (!p->vistiada) {
-            bfs(conexoes, qnt_conexoes, p, pessoas);
+            dfs(conexoes, qnt_conexoes, p, pessoas);
             COUNTER_FAMILIAS++;
         }
     }

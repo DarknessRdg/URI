@@ -1,15 +1,13 @@
 #include <iostream>
 #include <map>
-#include <queue>
 #define null NULL
 using namespace std;
 
 class Pessoa {
 public:
-    string nome;
     int id;
     int vistiada;
-    Pessoa(int index) { id = index; vistiada = false; nome = ""; }
+    Pessoa(int index) { id = index; vistiada = false; }
 };
 
 
@@ -32,14 +30,15 @@ public:
 
 
 int COUNTER = 1;
-int COUNTER_GROUPS = 1;
+int COUNTER_FAMILIAS = 0;
 map<string, int> IDS;
 
 
 int id_nome_pessoa(string __nome) {
     int id = IDS[__nome];
 
-    if (id == 0) {
+    bool nao_tem_id_ainda = id == 0;
+    if (nao_tem_id_ainda) {
         IDS[__nome] = COUNTER;
         id = COUNTER;
         COUNTER++;
@@ -56,7 +55,7 @@ void bfs(
 ) {
     pessoas_atual->vistiada = true;
 
-    // filter
+    // filter conexoes da pessoas não vistiadas ainda
     Conexao* conexos_da_pessoa[qnt_conexos];
     int count_conexos_da_pessoa = 0;
     for (int i = 0; i < qnt_conexos; i++) {
@@ -86,8 +85,6 @@ int main() {
     int qnt_pessoas, qnt_conexoes;
     cin >> qnt_pessoas; cin >> qnt_conexoes;
 
-    queue<int> fila;
-
     Conexao* conexoes[qnt_conexoes];
     Pessoa* pessoas[qnt_pessoas];
 
@@ -102,25 +99,20 @@ int main() {
         cin >> lixo;
         cin >> b;
 
-        auto id_a = id_nome_pessoa(a);
-        auto id_b = id_nome_pessoa(b);
+        auto index_pessoa_a = id_nome_pessoa(a);
+        auto index_pessoa_b = id_nome_pessoa(b);
 
-        pessoas[id_a]->nome = a;
-        pessoas[id_b]->nome = b;
-
-        conexoes[i] = new Conexao(id_a, id_b);
+        conexoes[i] = new Conexao(index_pessoa_a, index_pessoa_b);
     }
 
     for (Pessoa* p: pessoas) {
         if (!p->vistiada) {
             bfs(conexoes, qnt_conexoes, p, pessoas);
-            COUNTER_GROUPS++;
+            COUNTER_FAMILIAS++;
         }
     }
 
-    cout << COUNTER_GROUPS-1 << endl;
-
-
+    cout << COUNTER_FAMILIAS << endl;
 
     return 0;
 }
